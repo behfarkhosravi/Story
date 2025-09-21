@@ -101,11 +101,4 @@
       font-size: 0.9rem;
       color: #666;
   }
-  .dark .help-text {
-      color: #aaa;
-  }
-  .help-text a {
-      color: var(--button-bg);
-      text-decoration: none;
-  }
 </style>
