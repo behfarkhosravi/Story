@@ -197,10 +197,6 @@
     align-self: flex-end;
   }
 
-  .dark .message.assistant {
-    background-color: #2c2c2e;
-    color: white;
-  }
 
   @keyframes pulse-shadow {
     0% {
@@ -225,8 +221,6 @@
     align-items: center;
   }
 
-  .dark .chat-input {
-  }
 
   .chat-input input {
     flex-grow: 1;

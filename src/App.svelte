@@ -58,6 +58,12 @@
     showChat = false;
   }
 
+  function handleOverlayKeydown(event) {
+    if (event.key === 'Escape') {
+      handleEndChat();
+    }
+  }
+
   onMount(() => {
     const savedKey = localStorage.getItem('gemini-api-key');
     if (savedKey) {
@@ -96,7 +102,13 @@
   </div>
 
   {#if showChat}
-    <div class="chat-overlay" on:click|self={handleEndChat}>
+    <div
+      class="chat-overlay"
+      on:click|self={handleEndChat}
+      on:keydown={handleOverlayKeydown}
+      tabindex="0"
+      role="button"
+    >
       <Chat {apiKey} {characterName} bind:prompt={currentPrompt} on:endChat={handleEndChat} />
     </div>
   {/if}
