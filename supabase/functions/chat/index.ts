@@ -27,8 +27,14 @@ serve(async (req) => {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error.message || 'An unknown error occurred.');
+      let error_message = 'An unknown error occurred.';
+      try {
+        const error_data = await response.json();
+        error_message = error_data.error.message;
+      } catch (e) {
+        error_message = await response.text();
+      }
+      throw new Error(error_message);
     }
 
     const data = await response.json();
@@ -39,9 +45,9 @@ serve(async (req) => {
       status: 200,
     })
   } catch (err) {
-    return new Response(String(err?.message ?? err), {
+    return new Response(JSON.stringify({ error: err.message }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 500,
-    })
+    });
   }
 })
